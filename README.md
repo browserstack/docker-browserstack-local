@@ -11,19 +11,12 @@ Docker official Image packaging for Browserstack Local Binary
 - The default entrypoint runs the binary without any arguments.
 
 ### Running the binary inside container with custom arguments
-In order to run binary with custom [arguments](https://browserstack.com/local-testing) on simply run the binary as follows.
-`docker run <build name:tag> <arguments>`
+In order to run binary with custom [arguments](https://browserstack.com/local-testing) simply run the binary as follows.
+`docker run -it <build name:tag> <arguments>`
 
 Eg . Running binary inside container with force local and verbose 3 enabled
 `docker run -it browserstack/local --key=<access key> --verbose 3 --force-local`
 
-### Running the binary with a default custom set command
-- Edit the Dockerfile and replace the content in ENTRYPOINT with whatever command or script you wish to execute. 
-- Optionally you can also set the `BS_KEY` env variable inside the image itself. 
-- After editing save the Dockerfile and build the docker image using the following command.
-- Building the docker image
-- `docker build -t <build: tagname> <path to dockerfile>`
-- Now the image should be compatible to run the custom default command specified.
 
 ### Running tests for a service running on the host. 
 Since the binary is running inside the docker container, it would try to resolve all the host requests internally. Following methods can be used in order to overcome this limitation.
