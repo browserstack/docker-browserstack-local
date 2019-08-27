@@ -11,7 +11,7 @@ Docker official Image packaging for Browserstack Local Binary
 - The default entrypoint runs the binary without any arguments.
 
 ### Running the binary inside container with custom arguments
-In order to run binary with custom [arguments](https://browserstack.com/local-testing) one can simply run the binary as follows.
+In order to run binary with custom [arguments](https://browserstack.com/local-testing) on simply run the binary as follows.
 `docker run <build name:tag> <arguments>`
 
 Eg . Running binary inside container with force local and verbose 3 enabled
@@ -25,23 +25,25 @@ Eg . Running binary inside container with force local and verbose 3 enabled
 - `docker build -t <build: tagname> <path to dockerfile>`
 - Now the image should be compatible to run the custom default command specified.
 
-### Running tests for a server running on my network. 
-Since the binary is running inside the docker container, it would try to resolve all the localhost requests internally. 
+### Running tests for a service running on the host. 
+Since the binary is running inside the docker container, it would try to resolve all the host requests internally. Following methods can be used in order to overcome this limitation.
 
-###Method 1
-#### For Windows and Linux
-- Run the docker container with the following flag `–net=host`. By setting this flag container’s network stack is not isolated from the Docker host. ( For more information refer here.)
+### Method 1
+#### For Linux
+- Run the docker container with the following flag `–net=host`. By setting this flag the container’s network stack is not isolated from the Docker host. ( For additional information refer [here](https://docs.docker.com/network/host/).)
 
 - Running container with host netwroking
 ```docker run --net=host -it browserstack/local <arguments>```
 
-#### For Mac
-On Mac Docker runs its container on virtual machine. Henceforth, docker provides a way to access the host network using the url docker.for.mac.internal and for accessing localhost use `docker.for.mac.localhost`.
+#### For Mac and Windows
+- Since Docker runs its container on a virtual machine on Mac and Windows. The method used in linux would only isolate the network interface between the virtual machine and the container. Henceforth, docker provides a way to access the host network using the url  `host.docker.internal`. (For additional information refer [here](https://docs.docker.com/docker-for-mac/networking/))
+- Additionally, the test scripts have to be modified to include the above url instead of localhost.
+- Eg. If a serive is running on port 3000, one can access the service by using host.docker.internal:3000.
 
 #### Method 2
 Run the server on a public interface (eg. 0.0.0.0 ) and use the public address in your test scripts. 
-  Disclaimer : PLEASE DO UNDERSTAND THE RISK OF RUNNING YOUR SERVER ON PUBLIC INTERFACE BEFORE FOLLOWING THIS METHOD ).
+(Disclaimer : Please do understand the risk of running a service on public interface before following this method ).
 
 ### FAQ's
 * Can I run live and app-live using the binary running inside the container ?
-&nbsp;&nbsp;&nbsp;&nbsp;No Live and App-live won't work if you are running BrowserStackLocal binary inside a Docker container.
+  - No Live and App-live won't work if you are running BrowserStackLocal binary inside a Docker container.
