@@ -40,3 +40,4 @@ Run the server on a public interface (eg. 0.0.0.0 ) and use the public address i
 ### FAQ's
 * Can I run live and app-live using the binary running inside the container ?
   - No Live and App-live won't work if you are running BrowserStackLocal binary inside a Docker container.
+  
