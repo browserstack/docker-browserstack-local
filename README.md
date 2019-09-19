@@ -31,7 +31,7 @@ Since the binary is running inside the docker container, it would try to resolve
 #### For Mac and Windows
 - Since Docker runs its container on a virtual machine on Mac and Windows. The method used in linux would only isolate the network interface between the virtual machine and the container. Henceforth, docker provides a way to access the host network using the url  `host.docker.internal`. (For additional information refer [here](https://docs.docker.com/docker-for-mac/networking/)).
 - Additionally, the test scripts have to be modified to include the above url instead of localhost.
-- Eg. If a serive is running on port 3000, one can access the service by using host.docker.internal:3000.
+- Eg. If a service is running on port 3000, one can access the service by using host.docker.internal:3000.
 
 #### Method 2
 Run the server on a public interface (eg. 0.0.0.0 ) and use the public address in your test scripts. 
