@@ -1,14 +1,11 @@
 name: Docker CI Build and Test
 
 on:
-  push:
-    # run on push against master
+  pull_request:
+    # run on pull request against master
     branches: [master]
-    paths:
-      # if release.json is changed
-      - "release.json"
-      # if any of the dockerfile changed
-      - "**Dockerfile"
+    paths-ignore: 
+      -  '**.md'
 
 jobs:
   generate_matrix:
