@@ -1,0 +1,30 @@
+name: Docker Buld and Run tests
+
+on:
+  pull_request:
+    # run on pull request against master
+    branches: [master]
+  
+  push:
+    # run on push against master
+    branches: [master]
+    paths: 
+      # if release.json is changed
+      - 'release.json'
+      # if any of the dockerfile changed
+      - '**Dockerfile'
+
+jobs:
+  generate_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: set-matrix
+        run: |
+          content=$(jq -r 'tostring' release.json)
+          echo "::set-output name=matrix::$content"
+          echo ${{ steps.set-matrix.outputs.matrix }}
+
+  
