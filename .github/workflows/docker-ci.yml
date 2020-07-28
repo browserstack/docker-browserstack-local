@@ -1,0 +1,42 @@
+name: Docker CI Build and Test
+
+on:
+  push:
+    # run on push against master
+    branches: [master]
+    paths:
+      # if release.json is changed
+      - "release.json"
+      # if any of the dockerfile changed
+      - "**Dockerfile"
+
+jobs:
+  generate_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: set-matrix
+        run: |
+          content=$(jq -r 'tostring' release.json)
+          echo "::set-output name=matrix::$content"
+          echo ${{ steps.set-matrix.outputs.matrix }}
+
+  tests:
+    # needs the job matrix
+    needs: generate_matrix
+    runs-on: ubuntu-latest
+    strategy:
+      # create strategy to run jobs based on the matrix
+      matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
+
+    steps:
+      # checksout the repo to vm
+      - uses: actions/checkout@v2
+      - name: Build and run test
+        run: |
+          export BINARY=${{ matrix.binary_version }}
+          export PLATFORM=${{ matrix.platform }}
+          docker-compose --file ./tests/docker-compose.test.yml build
+          docker-compose --file ./tests/docker-compose.test.yml run sut
