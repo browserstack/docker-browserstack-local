@@ -45,3 +45,31 @@ jobs:
           docker-compose --file ./tests/docker-compose.test.yml build
           docker-compose --file ./tests/docker-compose.test.yml run sut
   
+  publish:
+    if: github.event_name == 'push'
+    needs: [generate_matrix, tests]
+    runs-on: ubuntu-latest
+    strategy:
+      # create strategy to run jobs based on the matrix
+      matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish to registry
+        uses: docker/build-push-action@v1.1.0
+        with:
+          repository: ${{ secrets.DOCKER_REPOSITORY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: ./${{ matrix.binary_version }}/${{ matrix.platform }}/Dockerfile
+          tags: "${{ matrix.binary_version }}-${{ matrix.platform }}"
+
+      - name: Update latest
+        if: ${{ matrix.latest }}
+        uses: docker/build-push-action@v1.1.0
+        with:
+          repository: ${{ secrets.DOCKER_REPOSITORY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: ./${{ matrix.binary_version }}/${{ matrix.platform }}/Dockerfile
+          tags: "latest"
