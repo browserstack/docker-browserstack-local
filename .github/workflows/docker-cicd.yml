@@ -27,4 +27,21 @@ jobs:
           echo "::set-output name=matrix::$content"
           echo ${{ steps.set-matrix.outputs.matrix }}
 
+  tests:
+    # needs the job matrix
+    needs: generate_matrix
+    runs-on: ubuntu-latest
+    strategy:
+      # create strategy to run jobs based on the matrix
+      matrix: ${{fromJson(needs.generate_matrix.outputs.matrix)}}
+
+    steps:
+      # checksout the repo to vm
+      - uses: actions/checkout@v2
+      - name: Build and run test
+        run: |
+          export BINARY=${{ matrix.binary_version }}
+          export PLATFORM=${{ matrix.platform }}
+          docker-compose --file ./tests/docker-compose.test.yml build
+          docker-compose --file ./tests/docker-compose.test.yml run sut
   
