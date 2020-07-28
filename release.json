@@ -1,0 +1,10 @@
+{
+    "include": [
+      {
+        "binary_version": "8.0",
+        "platform": "ubuntu",
+        "latest": true
+      }
+    ]
+  }
+  
