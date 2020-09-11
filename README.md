@@ -44,7 +44,7 @@ Run the server on a public interface (eg. 0.0.0.0 ) and use the public address i
 
 ### FAQ's
 * Can I run live and app-live using the binary running inside the container?
-   - Yes. For making live and app-live work, you need bind 45691, 45690 ports with host.
+   - Yes. For making live and app-live work, you need to bind 45691, 45690 ports with host.
    - Docker run command `docker run -it -p 127.0.0.01:45691:45691 -p 127.0.0.01:45690:45690 <build name:tag> --key <access key>`
 
 * Can I access binary console dashboard from my host?
