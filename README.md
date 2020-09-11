@@ -48,5 +48,5 @@ Run the server on a public interface (eg. 0.0.0.0 ) and use the public address i
    - Docker run command `docker run -it -p 127.0.0.01:45691:45691 -p 127.0.0.01:45690:45690 <build name:tag> --key <access key>`
 
 * Can I access binary console dashboard from my host?
-  - Yes. You need to bind docker 45454, 45954 with host.
+  - Yes. You need to bind docker 45454, 45954 ports with host.
   - Docker run command `docker run -it -p 127.0.0.01:45454:45454 -p 127.0.0.01:45454:45454 <build name:tag> --key <access key>`
