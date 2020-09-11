@@ -5,8 +5,8 @@ Docker official Image packaging for Browserstack Local Binary
 - Clone the repository. 
 - Depending on the choice of `binary_version` / `platform`, choose the appropriate Dockerfile 
 - Run ``` docker build  -t <build name:tag> <path to dockerfile>``` 
-- Eg. Build Image for Binary 8.0 on ubuntu platform.
-- ```docker build -t local 8.0/ubuntu```
+- Eg. Build Image for Binary 8.1 on ubuntu platform.
+- ```docker build -t local 8.1/ubuntu```
 
 ### Running the binary inside container with default command
  - Run the docker container using  

@@ -3,6 +3,11 @@
       {
         "binary_version": "8.0",
         "platform": "ubuntu",
+        "latest": false
+      },
+      {
+        "binary_version": "8.1",
+        "platform": "ubuntu",
         "latest": true
       }
     ]
