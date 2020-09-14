@@ -13,7 +13,7 @@ Docker official Image packaging for Browserstack Local Binary
 - ```docker run -it <build name:tag> --key <browserstack local testing access key>```
 - The default entrypoint runs the binary without any arguments.
 - For achieving best local testing experience. You may choose to bind binary services to host. 
--  `docker run -it -p 127.0.0.1:45691:45691 -p 127.0.0.1:45690:45690 -p 127.0.0.1:45454:45454 -p 127.0.0.1:45454:45454 <build name:tag> --key <access key>`
+-  `docker run -it -p 127.0.0.1:45691:45691 -p 127.0.0.1:45690:45690 -p 127.0.0.1:45454:45454 -p 127.0.0.1:45954:45954 <build name:tag> --key <access key>`
 
 ### Running the binary inside container with custom arguments
 In order to run binary with custom [arguments](https://browserstack.com/local-testing) simply run the binary as follows.
@@ -49,4 +49,4 @@ Run the server on a public interface (eg. 0.0.0.0 ) and use the public address i
 
 * Can I access binary console dashboard from my host?
   - Yes. You need to bind docker 45454, 45954 ports with host.
-  - Docker run command `docker run -it -p 127.0.0.1:45454:45454 -p 127.0.0.1:45454:45454 <build name:tag> --key <access key>`
+  - Docker run command `docker run -it -p 127.0.0.1:45454:45454 -p 127.0.0.1:45954:45954 <build name:tag> --key <access key>`
