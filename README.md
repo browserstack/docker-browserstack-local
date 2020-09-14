@@ -12,13 +12,15 @@ Docker official Image packaging for Browserstack Local Binary
  - Run the docker container using  
 - ```docker run -it <build name:tag> --key <browserstack local testing access key>```
 - The default entrypoint runs the binary without any arguments.
+- For achieving best local testing experience. You may choose to bind binary services to host. 
+-  `docker run -it -p 127.0.0.1:45691:45691 -p 127.0.0.1:45690:45690 -p 127.0.0.1:45454:45454 -p 127.0.0.1:45954:45954 <build name:tag> --key <access key>`
 
 ### Running the binary inside container with custom arguments
 In order to run binary with custom [arguments](https://browserstack.com/local-testing) simply run the binary as follows.
 `docker run -it <build name:tag> <arguments>`
 
 Eg. Running binary inside container with force local and verbose 3 enabled
-`docker run -it browserstack/local --key=<access key> --verbose 3 --force-local`
+`docker run -it browserstack/local --key <access key> --verbose 3 --force-local`
 
 
 ### Running tests for a service running on the host. 
@@ -42,8 +44,9 @@ Run the server on a public interface (eg. 0.0.0.0 ) and use the public address i
 
 ### FAQ's
 * Can I run live and app-live using the binary running inside the container?
-  - Not at the moment. Live and App-live won't work if you are running BrowserStackLocal binary inside a Docker container.
+   - Yes. For making live and app-live work, you need to bind 45691, 45690 ports with host.
+   - Docker run command `docker run -it -p 127.0.0.1:45691:45691 -p 127.0.0.1:45690:45690 <build name:tag> --key <access key>`
 
 * Can I access binary console dashboard from my host?
-  - Not at the moment. 
-  
+  - Yes. You need to bind docker 45454, 45954 ports with host.
+  - Docker run command `docker run -it -p 127.0.0.1:45454:45454 -p 127.0.0.1:45954:45954 <build name:tag> --key <access key>`
