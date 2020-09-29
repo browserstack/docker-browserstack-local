@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y wget unzip
 
-RUN wget https://bstack-local-prod.s3.amazonaws.com/binaries/v8.1.1-beta2/BrowserStackLocal-linux-x64.zip && \
+RUN wget https://bstack-local-prod.s3.amazonaws.com/binaries/v8.1.3/BrowserStackLocal-linux-x64.zip && \
     unzip BrowserStackLocal-linux-x64.zip && \
     rm BrowserStackLocal-linux-x64.zip && \
     chmod +x /BrowserStackLocal
