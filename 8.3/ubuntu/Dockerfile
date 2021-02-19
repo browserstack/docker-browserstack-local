@@ -9,4 +9,4 @@ RUN wget https://bstack-local-prod.s3.amazonaws.com/binaries/v8.3.0/BrowserStack
     rm BrowserStackLocal-linux-x64.zip && \
     chmod +x /BrowserStackLocal
 
-ENTRYPOINT [ "/BrowserStackLocal", "--source", "docker_8_1_ubuntu"]
+ENTRYPOINT [ "/BrowserStackLocal", "--source", "docker_8_3_ubuntu"]
