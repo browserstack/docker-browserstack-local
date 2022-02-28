@@ -13,6 +13,11 @@
       {
         "binary_version": "8.3",
         "platform": "ubuntu",
+        "latest": false
+      },
+      {
+        "binary_version": "8.5",
+        "platform": "ubuntu",
         "latest": true
       }
 
