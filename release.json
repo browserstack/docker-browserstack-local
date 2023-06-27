@@ -18,6 +18,11 @@
       {
         "binary_version": "8.5",
         "platform": "ubuntu",
+        "latest": false
+      },
+      {
+        "binary_version": "8.9",
+        "platform": "ubuntu",
         "latest": true
       }
 
